@@ -3,8 +3,9 @@
 
 def birthdayCakeCandles(candles: list[int]):
     from collections import Counter
+
     return max(Counter(candles).values())
-    #return max(list(dict((i, sorted(candles).count(i)) for i in candles).values()))
+    # return max(list(dict((i, sorted(candles).count(i)) for i in candles).values()))
 
 
 if __name__ == "__main__":
