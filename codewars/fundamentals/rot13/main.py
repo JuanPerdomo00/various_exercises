@@ -3,12 +3,12 @@
 
 def rot13(message):
     import string
-    alp = list(string.ascii_lowercase) 
+
+    alp = list(string.ascii_lowercase)
     encrypt = ""
     for char in message:
-        print(char)
         if char.isupper():
-            encrypt += alp[((alp.index(char.lower()))+13)%26].upper()
+            encrypt += alp[((alp.index(char.lower())) + 13) % 26].upper()
         elif char.islower():
             encrypt += alp[(alp.index(char) + 13) % 26]
 
