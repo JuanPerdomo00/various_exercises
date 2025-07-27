@@ -1,0 +1,14 @@
+list = [-10,-9,-8,-7,-6,-5,-3]
+minMax = list[0] #10
+i = 1
+list[i] = -9; list[i] === list[i - 1] is -10 + 1 === -9
+i = 2
+list[i] = -8; list[i] === list[i - 1] is -9 + 1 === -8
+i = 3
+list[i] = -7; list[i] === list[i - 1] is -8 + 1 === -7
+i = 4
+list[i] = -6; list[i] === list[i - 1] is -7 + 1 === -6
+i = 5
+list[i] = -5; list[i] === list[i - 1] is -6 + 1 === -5
+i = 6
+list[i] = -3; list[i] === list[i - 1] is -5 + 1 === -4 // no consecutivo
