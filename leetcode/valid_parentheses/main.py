@@ -1,37 +1,71 @@
-class Stack:
-    def __init__(self):
-        self._elements: List[Any] = []
-
-    def insert(self, item: Any):
-        self._elements.append(item)
-
-    def is_empty(self):
-        return len(self._elements) == 0
-
-    def remove(self):
-        if self.is_empty():
-            print("Empty Stack")
-            return None
-        return self._elements.pop()
+from collections import deque
 
 
 class Solution:
     def isValid(self, s: str) -> bool:
-        p = Stack()
-        for ss in s:
-            if ss == "{" or ss == "[" or ss == "(":
-                p.insert(ss)
+        dq = deque([])
 
-            if ss == "}" or ss == "]" or ss == ")":
-                if p.is_empty():
+        for parent in s:
+            if parent == "{" or parent == "[" or parent == "(":
+                dq.append(parent)
+            elif parent == "}" or parent == "]" or parent == ")":
+                if len(dq) == 0:
                     return False
-                m = p.remove()
+                next_p = dq.pop()
                 if (
-                    (m == "{" and ss != "}")
-                    or (m == "[" and ss != "]")
-                    or (m == "(" and ss != ")")
+                    parent == "}"
+                    and next_p != "{"
+                    or parent == "]"
+                    and next_p != "["
+                    or parent == ")"
+                    and next_p != "("
                 ):
                     return False
 
-        return p.is_empty()
+        return len(dq) == 0
 
+
+if __name__ == "__main__":
+    parents = [
+        "()",
+        "()[]{}",
+        "(]",
+        "([])",
+        "([)]",
+        "()[{}](([])){[()[]]}",
+        "[({})]{}([]{})",
+        "([]){}[{}](()())",
+        "{{[[(())]]}}",
+        "([])[]{{()}}",
+        "[{()}([]{}){{}}]",
+        "([{}])([]){{[()]}}",
+        "(((([])))){{{{}}}}",
+        "[({[]})]()[[()()]]",
+        "{[()]}[{}]({[]})",
+        "([)]{}[",
+        "(([])){[()]}}",
+        "([]{})]({})",
+        "(((([]))",
+        "[{()}({}]",
+        "(){([])}]",
+        "((((((((((((())))))))))))",
+        "[[[[[[]]]]]]}",
+        "{{{{{{{{}}}}}}}}}",
+        "([{}[({})]])})",
+        "()[{}](([])){[()[]]}((){})",
+        "(((([]))))[{}]{[{}]}(([]))",
+        "[({[]})]()[[()()]]{{[]}}",
+        "{[()]({[()]})}([])",
+        "[{}]((){})((()))[[]]{{}}",
+        "([{}])([]){{[()]}}[{}](()())",
+        "{{[[(())]]}}([]{})[()]{}",
+        "([])[]{{()}}[{}](){}",
+        "[{()}([]{}){{}}]{{[]}}",
+        "[({})]{}([]{})[()]({})",
+    ]
+    s = Solution()
+    for parent in parents:
+        if s.isValid(parent):
+            print(f"parents: {parent} Is valid")
+            continue
+        print(f"parents: {parent} No valid")
